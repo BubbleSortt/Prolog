@@ -30,7 +30,7 @@ athlete(eric). % false - Эрик любит плавать, но плавать
 %athlete(tom).
 
 
-%1.5
+% 1.5
 lives(zebra, land).
 lives(dog, land).
 lives(carp, water).
@@ -50,4 +50,5 @@ lives(vorobey, land).
 % lives(Who, Where).
 %
 % lives(X, land), lives(X, water).
+
 
