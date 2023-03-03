@@ -41,7 +41,7 @@ lives(crocodile, land).
 lives(frog, water).
 lives(frog, land).
 lives(duck, land).
-lives(duck, land).
+lives(duck, water).
 lives(eagle, air).
 lives(eagle, land).
 lives(vorobey, water).

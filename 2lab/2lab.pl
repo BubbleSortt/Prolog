@@ -30,6 +30,9 @@ have('Lena', babushka(red)).
 % have(Who, What). % Кто что имеет?
 % have('Lena', babushka(blue)). % Верно ли, что Лена имеет синий платок?
 
+% 2.5
+only_lives_in_land(Animal) :- lives(Animal, land), \+ (lives(Animal, Other), Other \= land).
+lives_in_many(Animal) :- lives(Animal, land), (lives(Animal, Place1), lives(Animal, Place2), Place1 \= Place2).
 
 % 2.6
 have('Ivan', rub('10000')).
@@ -49,4 +52,5 @@ have('Kolya', tv).
 % have('Petr', What). %Что имеет Петр?
 % have(Who, rub('10000')). %Кто имеет 10000 рублей?
 % have(Who, What). %Кто что имеет?
+ have_ivan_not_kolya(X) :- have('Ivan', X), \+ (have('Kolya', X), X = rub(_)). %Какие вещи имеет Иван, которых нет у Николая?
 
