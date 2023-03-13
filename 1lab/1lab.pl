@@ -1,6 +1,6 @@
 % 1.1
-likes(ellen, tennis).
 likes(john, football).
+likes(ellen, tennis).
 likes(tom, baseball).
 likes(eric, swimming).
 likes(mark, tennis).
@@ -35,7 +35,6 @@ lives(zebra, land).
 lives(dog, land).
 lives(carp, water).
 lives(wheal, water).
-lives(cat, X) :- lives(dog, X).
 lives(crocodile, water).
 lives(crocodile, land).
 lives(frog, water).
@@ -46,9 +45,15 @@ lives(eagle, air).
 lives(eagle, land).
 lives(vorobey, water).
 lives(vorobey, land).
+lives(cat, X) :- lives(dog, X).
 
-% lives(Who, Where).
-%
+
+lives_in_many(Animal) :- lives(Animal, land), (lives(Animal, Place1), lives(Animal, Place2), Place1 \= Place2).
+
+
+    % lives(Who, Where).
+%lives(X, land), X \= dog.
 % lives(X, land), lives(X, water).
+
 
 

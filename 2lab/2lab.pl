@@ -50,7 +50,34 @@ have('Kolya', tv).
 %(Деньги - не вещь)
 
 % have('Petr', What). %Что имеет Петр?
-% have(Who, rub('10000')). %Кто имеет 10000 рублей?
+% have(Who, rub(X)), X > 10000. %Кто имеет 10000 рублей?
 % have(Who, What). %Кто что имеет?
  have_ivan_not_kolya(X) :- have('Ivan', X), \+ (have('Kolya', X), X = rub(_)). %Какие вещи имеет Иван, которых нет у Николая?
 
+price('video', rub(12000)).
+price('tv', rub(8400)).
+price('freezer', rub(4200)).
+price('magni', rub(350)).
+price('radio', rub(1300)).
+price('watch', rub(500)).
+
+d)
+can_buy_video :- have('Petr', rub(X)), price('video', Y) X >= Y.
+    max_cash :- have(X, rub(Rub1)), have(Y, rub(Rub2)), max(Rub1, Rub2).
+ e)
+can_buy(People, Thing) :- \+ have(People,Thing), have(People, rub(Rub)), price(Thing, Price), Rub > Price.
+
+f)
+what_buy_Kolya :- \+ have(People,Thing), have('Kolya', rub(Rub)), price(X, Price), Rub > Price.
+what_buy_Kolya_and_has_Ivan(X) :- have('Kolya', rub(Rub)), price(X, rub(Price)), Rub > Price, have('Ivan', Thing).
+
+g)
+married('Anna', 'Kolya').
+married('Mary', 'Ivan').
+married('Olga', 'Petr').
+
+h)
+have(Wife, Thing) :- married(Wife, Husband), have(Husband, Thing).
+
+i)
+wife_has_same('Mary', car(volga, 32000, cherry, 1)).
