@@ -35,14 +35,14 @@ only_lives_in_land(Animal) :- lives(Animal, land), \+ (lives(Animal, Other), Oth
 lives_in_many(Animal) :- lives(Animal, land), (lives(Animal, Place1), lives(Animal, Place2), Place1 \= Place2).
 
 % 2.6
-have('Ivan', rub('10000')).
+have('Ivan', rub(10000)).
+have('Kolya', rub(20000)).
 have('Ivan', tv).
 have('Ivan', car(volga, 32000, cherry, 1)).
 have('Ivan', tape).
-have('Petr', rub('5000')).
+have('Petr', rub(5000)).
 have('Petr', tv).
 have('Petr', freeze).
-have('Kolya', rub('20000')).
 have('Kolya', tv).
 
 % 2.6 b)
@@ -61,23 +61,28 @@ price('magni', rub(350)).
 price('radio', rub(1300)).
 price('watch', rub(500)).
 
-d)
-can_buy_video :- have('Petr', rub(X)), price('video', Y) X >= Y.
-    max_cash :- have(X, rub(Rub1)), have(Y, rub(Rub2)), max(Rub1, Rub2).
- e)
-can_buy(People, Thing) :- \+ have(People,Thing), have(People, rub(Rub)), price(Thing, Price), Rub > Price.
+%d)
+%can_buy_video :- have('Petr', rub(X)), price('video', Y) X >= Y.
+%У кого больше всего денег? (коммент Ольгу)
+%have(Who, rub(X)), have(Who2, rub(Y)), have(Who3, rub(Z)), Who \= Who2, Who \= Who3, Who2 \= Who3, X > Y, X > Z.
 
-f)
+% e)
+can_buy(People, Thing) :- have(People, rub(Rub)), price(Thing, rub(Price)), Rub >= Price, not(have(People,Thing)), Thing \= rub(_).
+
+%f)
 what_buy_Kolya :- \+ have(People,Thing), have('Kolya', rub(Rub)), price(X, Price), Rub > Price.
 what_buy_Kolya_and_has_Ivan(X) :- have('Kolya', rub(Rub)), price(X, rub(Price)), Rub > Price, have('Ivan', Thing).
 
-g)
+%g)
 married('Anna', 'Kolya').
 married('Mary', 'Ivan').
 married('Olga', 'Petr').
 
-h)
+%h)
 have(Wife, Thing) :- married(Wife, Husband), have(Husband, Thing).
 
-i)
-wife_has_same('Mary', car(volga, 32000, cherry, 1)).
+%i)
+%Имеет ли Мария машину?
+%have('Mary', car(_,_,_,_)).
+%Что может купить Анна, чего не имеет Мария?
+%can_buy('Anna', Thing), not(have('Mary', Thing)).
