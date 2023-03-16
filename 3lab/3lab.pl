@@ -35,19 +35,39 @@ kurs(2, gruppa('Gilbert', gruppa('Ailer', gruppa('Lebniz', gruppa('Kantor'))))).
 % ?- kurs(N1, gruppa(X, gruppa(Y,Z))). -->  N1 = 1, X = 'Shakspear', Y = 'Molier', Z = gruppa('Chehov') ;  N1 = 2, X = 'Gilbert', Y = 'Ailer', Z = gruppa('Lebniz', gruppa('Kantor'))
 
 % 3.6
+% с накопителем
 fibonacci_acc(N) :- fib_acc(N, 0, 1).
 fib_acc(N, Previous, Current) :- Current =< N, write(Current), write(','), Next is Previous + Current, Previous1 is Current, fib_acc(N, Previous1, Next).
 
-
-/*fibonacci(0).
-fibonacci(1).
-fibonacci(N) :- N > 1, N1 is N-1,  fibonacci(N1), write(N), fibonacci(N-2),  write(','). */
-
+% без накопителем
 fibonacci(0, 0).
 fibonacci(1, 1).
-fibonacci(N, F) :- N > 1, N1 is N-1, fibonacci(N1, F1), N2 is N-2, fibonacci(N2, F2), F is F1 + F2.
+fibonacci(N, F) :-
+  N > 1,
+  N1 is N - 1,
+  N2 is N - 2,
+  fibonacci(N1, F1),
+  fibonacci(N2, F2),
+  F is F1 + F2.
 
-fib_print(0).
-fib_print(1).
-fib_print(N) :- N > 1, N1 is N-1, fib_print(N1), fibonacci(N, F), write(F), write(', ').
+% 3.7
+% нечетные
+fibonacci_sum_odd(N, Sum) :- fibonacci_sum_odd(N, 0, Sum).
+fibonacci_sum_odd(0, Sum, Sum).
+fibonacci_sum_odd(N, Acc, Sum) :-
+    fibonacci(N, F),
+    Odd is F mod 2,
+    NewAcc is Acc + (Odd * F),
+    N1 is N - 1,
+    fibonacci_sum_odd(N1, NewAcc, Sum).
 
+
+% четные
+fibonacci_sum_even(N, Sum) :- fibonacci_sum_even(N, 0, Sum).
+fibonacci_sum_even(0, Sum, Sum).
+fibonacci_sum_even(N, Acc, Sum) :-
+    fibonacci(N, F),
+    Even is F mod 2,
+    (Even =:= 0 -> NewAcc is Acc + F; NewAcc is Acc),
+    N1 is N - 1,
+    fibonacci_sum_even(N1, NewAcc, Sum).
