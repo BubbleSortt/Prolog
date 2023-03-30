@@ -40,3 +40,10 @@ min_list([X], X).
 min_list([Head|Tail], Min) :- max_list(Tail, Min1), Min is min(Head, Min1).
 
 % min_list([1, 2, 3, 35], Min). - Min = 1
+
+%Инверсия списка
+
+reverse([], []).
+reverse([Head|Tail], R) :- reverse(Tail, TR), append(TR, [Head], R).
+
+% reverse([1,2,3], N). - N = [3, 2, 1]

@@ -49,3 +49,34 @@ print_capitals :- country(Country, Capital), write(Capital), nl, fail.
 
 % 4.6
 % repeat, read(X), write(X), X=stop.
+
+% 4.7
+animal(zebra).
+animal(dog).
+animal(carp).
+animal(wheal).
+animal(cat).
+animal(crocodile).
+animal(frog).
+animal(duck).
+animal(eagle).
+animal(vorobey).
+
+lives(zebra, land).
+lives(dog, land).
+lives(carp, water).
+lives(wheal, water).
+lives(crocodile, water).
+lives(crocodile, land).
+lives(frog, water).
+lives(frog, land).
+lives(duck, land).
+lives(duck, water).
+lives(eagle, air).
+lives(eagle, land).
+lives(vorobey, water).
+lives(vorobey, land).
+lives(cat, X) :- lives(dog, X).
+
+
+has_two_area(X) :- animal(X), lives(X, Area1), lives(X, Area2), Area1 \= Area2, !.

@@ -71,3 +71,36 @@ fibonacci_sum_even(N, Acc, Sum) :-
     (Even =:= 0 -> NewAcc is Acc + F; NewAcc is Acc),
     N1 is N - 1,
     fibonacci_sum_even(N1, NewAcc, Sum).
+
+% 3.8
+% Является ли суммой первых четных чисел
+is_sum_of_even(Number, N) :-
+    between(1,100,N),
+    fibonacci_sum_even(N,Sum),
+    Sum =:= Number,
+    !.
+
+% Является ли суммой первых нечетных чисел
+is_sum_of_odd(Number, N) :-
+    between(1,100,N),
+    fibonacci_sum_odd(N,Sum),
+    Sum =:= Number,
+    !.
+
+% 3.8
+ack(0, Y, R) :- R is Y + 1.
+
+ack(X, 0, R) :-
+  X > 0,
+  X1 is X - 1,
+  ack(X1, 1, R).
+
+ack(X, Y, R) :-
+  X > 0,
+  Y > 0,
+  X1 is X - 1,
+  Y1 is Y - 1,
+  ack(X, Y1, R1),
+  ack(X1, R1, R).
+
+%ackermann(1, 5, R).
